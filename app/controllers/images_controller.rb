@@ -1,6 +1,5 @@
 class ImagesController < ApplicationController
-
-    def home
-        render
-    end
+  def home
+    render
+  end
 end

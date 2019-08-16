@@ -11,13 +11,15 @@ class ImagesController < ApplicationController
   def create
     @image = Image.new(image_params)
     if @image.save
-      render :show
+      redirect_to image_path @image
     else
-
+      flash[:errors] = @image.errors.messages
+      redirect_to new_image_path
     end
   end
 
   def show
+    @image = Image.find(params[:id])
     render
   end
 

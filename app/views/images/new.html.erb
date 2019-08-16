@@ -3,9 +3,13 @@
 <%= form_for(@image) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
-
+  <% display_errors('name').each do |error| %>
+    <li class="error"><%= error %></li>
+  <% end %>
   <%= f.label :url %>
   <%= f.text_field :url %>
+  <% display_errors('url').each do |error| %>
+    <li class="error"><%= error %></li>
+  <% end %>
   <%= f.submit %>
 <% end %>
-

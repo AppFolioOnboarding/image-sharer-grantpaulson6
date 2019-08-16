@@ -1,17 +1,5 @@
 <h1>Create a new Image</h1>
 
-<!--<form action="">-->
-<!--  <label for="">Image Name-->
-<!--    <input type="text">-->
-<!--  </label>-->
-
-<!--  <label for="">Image URL-->
-<!--    <input type="text">-->
-<!--  </label>-->
-
-
-<!--</form>-->
-
 <%= form_for(@image) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
@@ -21,4 +9,3 @@
   <%= f.submit %>
 <% end %>
 
-<%#= form_for @image %>

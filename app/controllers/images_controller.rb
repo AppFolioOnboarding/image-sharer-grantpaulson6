@@ -11,18 +11,19 @@ class ImagesController < ApplicationController
   def create
     @image = Image.new(image_params)
     if @image.save
-      redirect_to :show
+      render :show
+    else
+
     end
+  end
+
+  def show
+    render
   end
 
   private
 
   def image_params
-    debugger
     params.require(:image).permit(:name, :url)
-  end
-
-  def show
-    render
   end
 end

@@ -1,11 +1,17 @@
-<h1>Create a new Image</h1>
+<h1 id="header">Create a new Image</h1>
 
 <%= form_for(@image) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
+  <%  @image.errors[:name].present? && @image.errors.full_messages_for(:name).map do |error|  %>
+    <div><%= error %></div>
+  <% end %>
 
   <%= f.label :url %>
   <%= f.text_field :url %>
+  <%  @image.errors[:url].present? && @image.errors.full_messages_for(:url).map do |error|  %>
+    <div><%= error %></div>
+  <% end %>
+
   <%= f.submit %>
 <% end %>
-

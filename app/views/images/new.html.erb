@@ -1,0 +1,16 @@
+<h1 id="header">Create a new Image</h1>
+
+<%= form_for(@image) do |f| %>
+  <%= f.label :name %>
+  <%  @image.errors[:name].present? && @image.errors.full_messages_for(:name).map do |error|  %>
+    <div class="name error"><%= error %></div>
+  <% end %>
+
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+  <%  @image.errors[:url].present? && @image.errors.full_messages_for(:url).map do |error|  %>
+    <div class="url error"><%= error %></div>
+  <% end %>
+
+  <%= f.submit %>
+<% end %>

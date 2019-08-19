@@ -11,8 +11,8 @@ class ImagesController < ApplicationController
   def create
     @image = Image.new(image_params)
     if @image.save
-      # flash[:notice] = 'Image url successfully saved.'
-      redirect_to image_path @image, notice: 'Image url successfully saved.'
+      flash[:notice] = 'Image url successfully saved.'
+      redirect_to image_path @image
     else
       flash[:errors] = @image.errors.messages
       render :new, status: :unprocessable_entity

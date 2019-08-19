@@ -9,10 +9,10 @@ class Image < ApplicationRecord
     # is this a proper way of handling errors? of using control flow?
     if URI.parse(url).host.nil?
       errors.messages[:url] ||= []
-      errors.messages[:url].push('must be valid.')
+      errors.messages[:url].push('must be valid')
     end
   rescue URI::InvalidURIError
     errors.messages[:url] ||= []
-    errors.messages[:url].push('must be valid.')
+    errors.messages[:url].push('must be valid')
   end
 end

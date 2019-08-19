@@ -1,11 +1,8 @@
 class ImagesController < ApplicationController
-  def home
-    render
-  end
+  def home; end
 
   def new
     @image = Image.new
-    render
   end
 
   def create
@@ -23,7 +20,6 @@ class ImagesController < ApplicationController
 
   def show
     @image = Image.find(params[:id])
-    render
   end
 
   private

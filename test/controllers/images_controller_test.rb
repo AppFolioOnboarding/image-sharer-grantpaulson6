@@ -48,4 +48,10 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_select '.name.error', 'Name can\'t be blank'
     assert_select '.url.error', 'Url must be valid'
   end
+  # test 'test_home' do
+  #   get root_url
+  #
+  #   assert_select 'h1', /Welcome*/
+  #   assert_response :success
+  # end
 end

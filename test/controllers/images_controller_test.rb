@@ -17,8 +17,8 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   def test_show
-    image = Image.create!(name: 'zion', url: 'https://www.pewtrusts.org/-/media/post-launch-images/2018/01/istock-479409864/istock-479409864_16x9.jpg?la=en&hash=A70682998CAE7084094117D7CA8E14C340BCEC55')
-
+    image = Image.create!(name: 'zion', url: 'https://www.pewtrusts.org/-/media/post-launch-images/'\
+'2018/01/istock-479409864/istock-479409864_16x9.jpg?la=en&hash=A70682998CAE7084094117D7CA8E14C340BCEC55')
     get image_url(image)
 
     assert_response :success
@@ -27,12 +27,14 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
 
   def test_create__succeed
     assert_difference 'Image.count' do
-      image_params = { image: { name: 'a cat', url: 'https://d17fnq9dkz9hgj.cloudfront.net/uploads/2012/11/101438745-cat-conjunctivitis-causes.jpg' } }
+      image_params = { image: { name: 'a cat', url: 'https://d17fnq9dkz9hgj.cloudfront.net/uploads/'\
+'2012/11/101438745-cat-conjunctivitis-causes.jpg' } }
       post images_path, params: image_params
     end
 
     assert_response :redirect
-    # Note: query parameters in the url (from the notice) would require this testing pattern instead of using assert_redirect_to
+    # Note: query parameters in the url (from the notice) would require this testing pattern
+    # instead of using assert_redirect_to
     assert_match image_url(Image.last), @response.redirect_url
     assert_equal 'Image url successfully saved.', flash[:notice]
   end

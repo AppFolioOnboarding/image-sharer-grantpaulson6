@@ -7,12 +7,8 @@ class Image < ApplicationRecord
   # should this be in a validator class?
   def valid_url?
     # is this a proper way of handling errors? of using control flow?
-    if URI.parse(url).host.nil?
-      errors.messages[:url] ||= []
-      errors.messages[:url].push('must be valid')
-    end
+    URI.parse(url).host.nil? && errors.add(:url, 'must be valid')
   rescue URI::InvalidURIError
-    errors.messages[:url] ||= []
-    errors.messages[:url].push('must be valid')
+    errors.add(:url, 'must be valid')
   end
 end

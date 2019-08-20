@@ -1,8 +1,7 @@
 <h1 id="header">Welcome to the Fantastic Image Sharester</h1>
 
-
-<p>Site under construction, please come back later</p>
-
-
+<div class="notice"> <%= flash[:notice] %></div>
 
 <%= link_to 'Add new Image', new_image_path  %>
+
+<%= render 'index', images: @images %>

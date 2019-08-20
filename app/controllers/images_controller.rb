@@ -1,5 +1,7 @@
 class ImagesController < ApplicationController
-  def home; end
+  def home
+    @images = Image.order(created_at: :desc)
+  end
 
   def new
     @image = Image.new
@@ -13,13 +15,14 @@ class ImagesController < ApplicationController
     else
       flash[:errors] = @image.errors.messages
       render :new, status: :unprocessable_entity
-      # QUESTION: would we want to redirect_to new_image_path to maintain consistent URL for client? (shows as
-      # /images after failure)
     end
   end
 
   def show
     @image = Image.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:notice] = 'Unable to find image.'
+    redirect_to root_path
   end
 
   private

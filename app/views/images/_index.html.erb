@@ -1,0 +1,9 @@
+
+<div class="image-index">
+  <% images.each do |image| %>
+    <div class="image-tile">
+      <label for="image-<%= image.name %>"><%= image.name %></label>
+      <img id="image-<%= image.name %>" src="<%= image.url %>" alt="">
+    </div>
+  <% end %>
+</div>

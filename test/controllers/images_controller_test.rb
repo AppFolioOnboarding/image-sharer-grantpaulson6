@@ -4,9 +4,28 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   def test_home
     get root_path
 
-    # should we test what template is rendered?
     assert_response :success
     assert_select '#header', /Welcome/
+  end
+
+  def test_home__renders_index_of_images
+    get root_path
+
+    # QUESTION: is testing for CSS class enough, or should actually count elements and compare to db?
+    assert_response :success
+    assert_select '.image-index'
+  end
+
+  def test_home__displays_images_by_desc_date_created
+    Image.create!(name: 'oldest', url: 'https://www.pewtrusts.org/-/media/post-launch-images/'\
+'2018/01/istock-479409864/istock-479409864_16x9.jpg?la=en&hash=A70682998CAE7084094117D7CA8E14C340BCEC55')
+    Image.create!(name: 'newest', url: 'https://www.pewtrusts.org/-/media/post-launch-images/'\
+'2018/01/istock-479409864/istock-479409864_16x9.jpg?la=en&hash=A70682998CAE7084094117D7CA8E14C340BCEC55')
+
+    get root_path
+
+    assert_response :success
+    assert_select '.image-tile:first-child label', 'newest'
   end
 
   def test_new

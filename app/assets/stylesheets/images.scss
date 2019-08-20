@@ -3,5 +3,25 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
-    margin: 20px !important;
+  margin: 20px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-index {
+  padding-top: 25px;
+
+  .image-tile {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+
+    img {
+      width: 400px;
+      height: auto;
+      object-fit: cover;
+      overflow: hidden;
+    }
+  }
 }

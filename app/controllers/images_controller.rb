@@ -1,5 +1,7 @@
 class ImagesController < ApplicationController
-  def home; end
+  def home
+    @images = Image.order(created_at: :desc)
+  end
 
   def new
     @image = Image.new

@@ -2,6 +2,6 @@
 
 <div class="notice"> <%= flash[:notice] %></div>
 
-<p>Site under construction, please come back later</p>
-
 <%= link_to 'Add new Image', new_image_path  %>
+
+<%= render 'index', images: @images %>

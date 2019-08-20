@@ -2,6 +2,7 @@ require 'uri'
 
 class Image < ApplicationRecord
   validates :name, :url, presence: true
+  # validates :url, url: true #(built in for Rails?)
   validate :valid_url?
 
   # should this be in a validator class?

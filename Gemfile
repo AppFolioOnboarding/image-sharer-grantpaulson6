@@ -45,6 +45,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
 end
 

@@ -2,26 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body {
-  margin: 20px !important;
+.card-image-top {
+  width: 30rem;
+  object-fit: cover;
+  height: 20rem;
+  overflow: hidden;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.image-show {
+  width: 80%;
+}
+
+.page-body {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.image-index {
-  padding-top: 25px;
-
-  .image-tile {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 25px;
-
-    img {
-      width: 400px;
-      height: auto;
-      object-fit: cover;
-      overflow: hidden;
-    }
-  }
+.form-group {
+  width: 30rem;
 }

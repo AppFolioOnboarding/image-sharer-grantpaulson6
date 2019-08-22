@@ -1,6 +1,12 @@
-<h2 id="header">Viewing the <%= @image.name %></h2>
+<div class="container-fluid p-0">
 
-<div class="notice"> <%= flash[:notice] %></div>
+  <%= render 'nav' %>
 
-<img src="<%= @image.url %>" alt="">
+  <div class="page-body">
+    <h2 class="page-header my-3">Viewing <%= @image.name %></h2>
 
+    <div class="alert alert-primary <%= flash[:notice] ? '' : 'collapse' %>"><%= flash[:notice] %></div>
+
+    <img src="<%= @image.url %>" alt="" class="image-show">
+  </div>
+</div>

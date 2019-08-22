@@ -1,9 +1,5 @@
-
-<div class="image-index">
+<div class="row row justify-content-center">
   <% images.each do |image| %>
-    <div class="image-tile">
-      <label for="image-<%= image.name %>"><%= image.name %></label>
-      <img id="image-<%= image.name %>" src="<%= image.url %>" alt="">
-    </div>
+    <%= render 'tile', image: image %>
   <% end %>
 </div>

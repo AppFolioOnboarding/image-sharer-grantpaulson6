@@ -5,15 +5,14 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     get root_path
 
     assert_response :success
-    assert_select '#header', /Welcome/
+    assert_template :home
   end
 
   def test_home__renders_index_of_images
     get root_path
 
-    # QUESTION: is testing for CSS class enough, or should actually count elements and compare to db?
     assert_response :success
-    assert_select '.image-index'
+    assert_template partial: '_index'
   end
 
   def test_home__displays_images_by_desc_date_created
@@ -25,14 +24,14 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     get root_path
 
     assert_response :success
-    assert_select '.image-tile:first-child label', 'newest'
+    assert_select '.card:first-child p', 'newest'
   end
 
   def test_new
     get new_image_path
 
     assert_response :success
-    assert_select '#header', /Create/
+    assert_template :new
   end
 
   def test_show__succeed
@@ -41,7 +40,8 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     get image_url(image)
 
     assert_response :success
-    assert_select '#header', /zion/
+    assert_template :show
+    assert_select '.page-header', /zion/
   end
 
   def test_show__fail
@@ -61,7 +61,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
     # Note: using query parameters in the url (from the notice) would require this testing pattern
     # instead of using assert_redirect_to
-    assert_match image_url(Image.last), @response.redirect_url
+    assert_equal image_url(Image.last), @response.redirect_url
     assert_equal 'Image url successfully saved.', flash[:notice]
   end
 
@@ -72,7 +72,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :unprocessable_entity
-    assert_select '.name.error', 'Name can\'t be blank'
-    assert_select '.url.error', 'Url must be valid'
+    assert_includes flash[:errors] && flash[:errors][:name], 'can\'t be blank'
+    assert_includes flash[:errors] && flash[:errors][:url], 'must be valid'
   end
 end

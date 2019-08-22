@@ -1,17 +1,15 @@
-<h1 id="header">Create a new Image</h1>
+<div class="image-index container-fluid p-0">
 
-<%= form_for(@image) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%  @image.errors[:name].present? && @image.errors.full_messages_for(:name).map do |error|  %>
-    <div class="name error"><%= error %></div>
-  <% end %>
+  <%= render 'nav' %>
 
-  <%= f.label :url %>
-  <%= f.text_field :url %>
-  <%  @image.errors[:url].present? && @image.errors.full_messages_for(:url).map do |error|  %>
-    <div class="url error"><%= error %></div>
-  <% end %>
+  <div class="page-body">
+    <h2 class="header my-3">Create a new Image</h2>
 
-  <%= f.submit %>
-<% end %>
+    <%= simple_form_for @image, html: { class: "form-group"} do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :name %>
+      <%= f.input :url %>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+</div>

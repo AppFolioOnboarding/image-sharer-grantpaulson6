@@ -20,6 +20,7 @@ gem 'jquery-rails'
 gem 'webpacker', '~> 4'
 
 gem 'http'
+gem 'simple_form'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -44,6 +45,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
 end
 

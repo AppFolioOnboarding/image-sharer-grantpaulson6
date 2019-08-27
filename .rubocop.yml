@@ -8,6 +8,7 @@ AllCops:
     - 'bin/*'
     - 'config/initializers/simple_form.rb'
     - 'config/initializers/simple_form_bootstrap.rb'
+    - 'db/migrate/*'
   TargetRubyVersion: 2.5
 
 Layout/IndentFirstArrayElement:

@@ -36,12 +36,14 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
 
   def test_show__succeed
     image = Image.create!(name: 'zion', url: 'https://www.pewtrusts.org/-/media/post-launch-images/'\
-'2018/01/istock-479409864/istock-479409864_16x9.jpg?la=en&hash=A70682998CAE7084094117D7CA8E14C340BCEC55')
+'2018/01/istock-479409864/istock-479409864_16x9.jpg?la=en&hash=A70682998CAE7084094117D7CA8E14C340BCEC55',
+                          tag_list: %w[furry feline orange])
     get image_url(image)
 
     assert_response :success
     assert_template :show
     assert_select '.page-header', /zion/
+    assert_select '.tag', 3
   end
 
   def test_show__fail
@@ -51,18 +53,29 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 'Unable to find image.', flash[:notice]
   end
 
-  def test_create__succeed
-    assert_difference 'Image.count' do
+  def test_create__succeeds_with_tags
+    assert_difference 'Image.count', 1 do
+      image_params = { image: { name: 'a cat', url: 'https://d17fnq9dkz9hgj.cloudfront.net/uploads/'\
+'2012/11/101438745-cat-conjunctivitis-causes.jpg', tag_list: %w[furry feline orange] } }
+      post images_path, params: image_params
+    end
+
+    assert_redirected_to image_path(Image.last)
+    assert_equal 'Image url successfully saved.', flash[:notice]
+    assert_equal 'a cat', Image.last.name
+    assert_equal 3, Image.last.tags.count
+  end
+
+  def test_create__succeeds_without_tags
+    assert_difference 'Image.count', 1 do
       image_params = { image: { name: 'a cat', url: 'https://d17fnq9dkz9hgj.cloudfront.net/uploads/'\
 '2012/11/101438745-cat-conjunctivitis-causes.jpg' } }
       post images_path, params: image_params
     end
 
-    assert_response :redirect
-    # Note: using query parameters in the url (from the notice) would require this testing pattern
-    # instead of using assert_redirect_to
-    assert_equal image_url(Image.last), @response.redirect_url
+    assert_redirected_to image_path(Image.last)
     assert_equal 'Image url successfully saved.', flash[:notice]
+    assert_equal 'a cat', Image.last.name
   end
 
   def test_create__fail

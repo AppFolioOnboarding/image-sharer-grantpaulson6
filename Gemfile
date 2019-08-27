@@ -19,6 +19,7 @@ gem 'jquery-rails'
 
 gem 'webpacker', '~> 4'
 
+gem 'acts-as-taggable-on', '~> 6.0'
 gem 'http'
 gem 'simple_form'
 

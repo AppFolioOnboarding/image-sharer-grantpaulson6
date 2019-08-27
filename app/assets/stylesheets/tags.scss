@@ -1,0 +1,18 @@
+.form-control.tag-field {
+  width: 70%;
+}
+
+.input-and-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.show-tag-index {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  width: 80%;
+}

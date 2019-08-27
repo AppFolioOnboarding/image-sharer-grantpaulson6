@@ -9,7 +9,16 @@
       <%= f.error_notification %>
       <%= f.input :name %>
       <%= f.input :url %>
-      <%= f.button :submit %>
+
+      <div class="form-group">
+        <label for="tag-adder">Tags</label>
+        <div class="input-and-button">
+          <input id="tag-adder" class="form-control tag-field">
+          <button id="add-tag" class="btn btn-secondary">Add Tag</button>
+        </div>
+      </div>
+
+      <%= f.button :submit, class: "btn btn-lg btn-secondary", id: 'submit-image'  %>
     <% end %>
   </div>
 </div>

@@ -1,6 +1,8 @@
 require 'uri'
 
 class Image < ApplicationRecord
+  acts_as_taggable
+
   validates :name, :url, presence: true
   # validates :url, url: true #(built in for Rails?)
   validate :valid_url?

@@ -1,7 +1,5 @@
 <div class="container-fluid p-0">
 
-  <%= render 'nav' %>
-
   <div class="page-body">
     <h2 class="page-header my-3">Viewing <%= @image.name %></h2>
 
@@ -11,9 +9,7 @@
 
     <div class="show-tag-index">
       <% @image.tags.each do |tag| %>
-        <div class="tag alert alert-success alert-dismissible fade show" role="alert">
-          <%= tag.name %>
-        </div>
+        <%= link_to tag.name, root_url(tag_list: @filter_tags + [tag.name]), class: "tag alert alert-success alert-dismissible fade show" %>
       <% end %>
     </div>
   </div>

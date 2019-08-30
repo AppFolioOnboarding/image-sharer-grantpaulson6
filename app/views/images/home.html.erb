@@ -1,5 +1,6 @@
 <div class="container-fluid p-0">
-  <%= render 'nav' %>
+
   <div class="alert alert-primary <%= flash[:notice] ? '' : 'collapse' %>"><%= flash[:notice] %></div>
-  <%= render 'index', images: @images %>
+
+  <%= render 'tiles', images: @images, filter_tags: @filter_tags  %>
 </div>

@@ -1,0 +1,7 @@
+<% filter_tags.each do |tag| %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <%= tag %>
+    <% updated_tags =  %>
+    <%= link_to '<span aria-hidden="true">&times;</span>'.html_safe, root_url(tag_list: filter_tags - [tag], class: "close-tag") %>
+  </div>
+<% end %>

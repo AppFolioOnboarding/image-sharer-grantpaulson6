@@ -1,0 +1,14 @@
+<div class="row row justify-content-center">
+  <% images.each do |image| %>
+    <div class="card m-3">
+        <%= link_to image_path(image, tag_list: filter_tags) do %>
+          <img class="card-image-top" src="<%= image.url %>" alt="Card image cap">
+          <div class="card-body">
+            <p class="card-text text-dark"><%= image.name %></p>
+          </div>
+        <% end %>
+    </div>
+  <% end %>
+</div>
+
+

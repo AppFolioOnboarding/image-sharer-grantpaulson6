@@ -12,7 +12,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     get root_path
 
     assert_response :success
-    assert_template partial: '_index'
+    assert_template partial: '_tiles'
   end
 
   def test_home__displays_images_by_desc_date_created
@@ -25,6 +25,35 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select '.card:first-child p', 'newest'
+  end
+
+  def test_home__filters_by_tags
+    Image.create!(name: 'has tags', url: 'https://www.pewtrusts.org/-/media/post-launch-images/'\
+'2018/01/istock-479409864/istock-479409864_16x9.jpg?la=en&hash=A70682998CAE7084094117D7CA8E14C340BCEC55',
+                  tag_list: %w[mountains rivers oceans])
+    Image.create!(name: 'incorrect tags', url: 'https://www.pewtrusts.org/-/media/post-launch-images/'\
+'2018/01/istock-479409864/istock-479409864_16x9.jpg?la=en&hash=A70682998CAE7084094117D7CA8E14C340BCEC55',
+                  tag_list: %w[mountains lakes])
+
+    get root_path, params: { tag_list: %w[mountains rivers] }
+
+    assert_response :success
+    assert_select '.card', 1
+    assert_select '.card p', 'has tags'
+  end
+
+  def test_home__filters_by_nonexistent_tag
+    Image.create!(name: 'has tags', url: 'https://www.pewtrusts.org/-/media/post-launch-images/'\
+'2018/01/istock-479409864/istock-479409864_16x9.jpg?la=en&hash=A70682998CAE7084094117D7CA8E14C340BCEC55',
+                  tag_list: %w[mountains rivers oceans])
+    Image.create!(name: 'incorrect tags', url: 'https://www.pewtrusts.org/-/media/post-launch-images/'\
+'2018/01/istock-479409864/istock-479409864_16x9.jpg?la=en&hash=A70682998CAE7084094117D7CA8E14C340BCEC55',
+                  tag_list: %w[mountains lakes])
+
+    get root_path, params: { tag_list: %w[mountains boats] }
+
+    assert_response :success
+    assert_select '.card', false
   end
 
   def test_new
@@ -47,7 +76,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   def test_show__fail
-    get image_url 500
+    get image_url 1000
 
     assert_response :redirect
     assert_equal 'Unable to find image.', flash[:notice]

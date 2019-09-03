@@ -1,8 +1,8 @@
 class ImagesController < ApplicationController
-  before_action :set_filter_tags
+  before_action :filter_tags
 
   def home
-    @images = if !filter_tags || filter_tags.empty?
+    @images = if filter_tags.none?
                 Image.order(created_at: :desc)
               else
                 Image.tagged_with(filter_tags).order(created_at: :desc)
@@ -38,10 +38,6 @@ class ImagesController < ApplicationController
   end
 
   def filter_tags
-    params.permit(tag_list: [])[:tag_list] || []
-  end
-
-  def set_filter_tags
-    @filter_tags = filter_tags
+    @filter_tags ||= params.permit(tag_list: [])[:tag_list] || []
   end
 end

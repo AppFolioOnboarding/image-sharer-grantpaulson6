@@ -38,6 +38,6 @@ class ImagesController < ApplicationController
   end
 
   def filter_tags
-    @filter_tags ||= params.permit(tag_list: [])[:tag_list] || []
+    @filter_tags ||= params.permit(tag_list: [])[:tag_list]&.uniq || []
   end
 end

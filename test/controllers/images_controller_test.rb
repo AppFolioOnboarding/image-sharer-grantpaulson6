@@ -72,7 +72,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_template :show
     assert_select '.page-header', /zion/
-    assert_select '.tag', 3
+    assert_select '.tags', 3
   end
 
   def test_show__fail

@@ -5,12 +5,15 @@
 
     <div class="alert alert-primary <%= flash[:notice] ? '' : 'collapse' %>"><%= flash[:notice] %></div>
 
-    <img src="<%= @image.url %>" alt="" class="image-show">
-
     <div class="show-tag-index">
       <% @image.tags.each do |tag| %>
         <%= link_to tag.name, root_url(tag_list: @filter_tags + [tag.name]), class: "tag alert alert-success alert-dismissible fade show" %>
       <% end %>
     </div>
+
+    <%= link_to 'Delete this image', image_path(@image, tag_list: @filter_tags), :data => {:confirm => "Are you sure?", :method => :delete}, class: "tag alert alert-danger alert-dismissible fade show" %>
+
+    <img src="<%= @image.url %>" alt="" class="image-show">
+
   </div>
 </div>

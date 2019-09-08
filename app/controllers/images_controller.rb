@@ -31,6 +31,16 @@ class ImagesController < ApplicationController
     redirect_to root_path
   end
 
+  def destroy
+    @image = Image.find(params[:id])
+    @image.destroy
+    flash[:notice] = 'Image url successfully destroyed.'
+    redirect_to root_path
+  rescue ActiveRecord::RecordNotFound
+    flash[:notice] = 'Unable to find image.'
+    redirect_to root_path
+  end
+
   private
 
   def image_params

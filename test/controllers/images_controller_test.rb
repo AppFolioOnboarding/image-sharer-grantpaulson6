@@ -117,4 +117,22 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_includes flash[:errors] && flash[:errors][:name], 'can\'t be blank'
     assert_includes flash[:errors] && flash[:errors][:url], 'must be valid'
   end
+
+  def test_destroy__succeed
+    image = Image.create!(name: 'a cat', url: 'https://d17fnq9dkz9hgj.cloudfront.net/uploads/'\
+'2012/11/101438745-cat-conjunctivitis-causes.jpg')
+    assert_difference 'Image.count', -1 do
+      delete image_path(image)
+    end
+    assert_redirected_to root_path
+    assert_equal 'Image url successfully destroyed.', flash[:notice]
+  end
+
+  def test_destroy__fail
+    assert_no_difference 'Image.count' do
+      delete image_path(1000)
+    end
+    assert_redirected_to root_path
+    assert_equal 'Unable to find image.', flash[:notice]
+  end
 end
